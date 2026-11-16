@@ -56,3 +56,13 @@ export function renderState(state: SearchState, { onRetry, onSelect }: ViewHandl
       return el('ul', { className: 'cards' }, ...state.countries.map((c) => card(c, onSelect)));
   }
 }
+
+export const renderHistory = (history: string[], onPick: (query: string) => void): Node[] =>
+  history.map((query) =>
+    el('button', {
+      type: 'button',
+      className: 'chip',
+      textContent: query,
+      onclick: () => onPick(query),
+    }),
+  );
