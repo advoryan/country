@@ -1,0 +1,6 @@
+export class HttpError extends Error {
+  constructor(readonly status: number) {
+    super(`Request failed with status ${status}`);
+    this.name = 'HttpError';
+  }
+}
