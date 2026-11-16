@@ -1,3 +1,4 @@
+import { createCachedSearch } from './cached-search.js';
 import { createDetails } from './details.js';
 import { el } from './dom.js';
 import { createSearchController, type SearchState } from './search-controller.js';
@@ -20,7 +21,7 @@ const render = (state: SearchState): void => {
   );
 };
 
-const controller = createSearchController(searchCountries, render);
+const controller = createSearchController(createCachedSearch(searchCountries), render);
 
 input.addEventListener('input', () => controller.input(input.value));
 

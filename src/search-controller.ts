@@ -1,6 +1,6 @@
 import { classifyError, type ErrorKind } from './classify-error.js';
 import { debounce } from './debounce.js';
-import type { Country } from './types.js';
+import type { Country, Search } from './types.js';
 
 export type SearchState =
   | { status: 'idle' }
@@ -8,8 +8,6 @@ export type SearchState =
   | { status: 'results'; query: string; countries: Country[] }
   | { status: 'empty'; query: string }
   | { status: 'error'; query: string; message: string };
-
-export type Search = (query: string, signal: AbortSignal) => Promise<Country[]>;
 
 export const SEARCH_DELAY_MS = 350;
 

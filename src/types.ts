@@ -29,3 +29,5 @@ export interface Country {
   languages: string[];
   currencies: string[];
 }
+
+export type Search = (query: string, signal: AbortSignal) => Promise<Country[]>;
