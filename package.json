@@ -4,7 +4,6 @@
   "description": "Live country search with request cancellation.",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && npx serve .",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
