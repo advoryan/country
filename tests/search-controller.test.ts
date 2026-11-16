@@ -33,14 +33,15 @@ describe('createSearchController', () => {
     vi.advanceTimersByTime(SEARCH_DELAY_MS);
 
     expect(requests).toHaveLength(0);
-    expect(states).toEqual([{ status: 'idle' }]);
+    expect(states.at(-1)).toEqual({ status: 'idle' });
   });
 
-  it('shows loading while the request is in flight', () => {
-    controller.input('spain');
-    vi.advanceTimersByTime(SEARCH_DELAY_MS);
+  it('shows loading right after input and while the request is in flight', () => {
+    controller.input('sp');
+    expect(states).toEqual([{ status: 'loading', query: 'sp' }]);
 
-    expect(states).toEqual([{ status: 'loading', query: 'spain' }]);
+    vi.advanceTimersByTime(SEARCH_DELAY_MS);
+    expect(states).toEqual([{ status: 'loading', query: 'sp' }]);
   });
 
   it('does not report own cancellation as an error', async () => {

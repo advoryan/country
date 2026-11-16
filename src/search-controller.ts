@@ -27,7 +27,6 @@ export function createSearchController(
 
   const run = async (query: string): Promise<void> => {
     controller = new AbortController();
-    onChange({ status: 'loading', query });
 
     try {
       const countries = await search(query, controller.signal);
@@ -47,8 +46,13 @@ export function createSearchController(
     debouncedRun.cancel();
     lastQuery = value.trim();
 
-    if (!lastQuery) onChange({ status: 'idle' });
-    else if (immediate) void run(lastQuery);
+    if (!lastQuery) {
+      onChange({ status: 'idle' });
+      return;
+    }
+
+    onChange({ status: 'loading', query: lastQuery });
+    if (immediate) void run(lastQuery);
     else debouncedRun(lastQuery);
   };
 
